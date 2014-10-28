@@ -1,0 +1,11 @@
+Package: robR
+Type: Package
+Title: Useful functions for Rob and likely a few others.
+Version: 0.0.1
+Date: 2014-10-22
+Authors@R: person("Rob", "Kemp", email="rjameskemp@gmail.com", role=c("aut", "cre"))
+Maintainer: Rob Kemp <rjameskemp@gmail.comt>
+Description: A Personal Package with useful functions written (or borrowed) by
+    Rob. Includes functions for categorizing age, growth rates, relative size
+    calculations, and exporting data to an Excel file.
+License: MIT + file LICENSE
