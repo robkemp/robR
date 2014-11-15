@@ -10,3 +10,5 @@ but if you see something odd, let me know and I'll gladly make adjsutments.
 This package will continue to be updated with new functions and code as I write or need them.
 
 Contact me at <rjameskemp@gmail.com>.
+
+devtools::install_github("robkemp/robR")
