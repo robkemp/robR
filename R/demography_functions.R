@@ -54,3 +54,54 @@ age.cat= function(data, agevar, groups="census", factor=TRUE){
   }
 }
 
+#' Estimate Model Migration Schedules using Non-linear Least Squares
+#' 
+#' @param data Data frame with places in columns with an ID for age.
+#' @param model Picks 7, 9, or 11 parameter models
+#' @param ages Number of age categories, use the maximum age.
+#' @param profiles Number of profiles/areas to fit.
+#' @keywords initital Optional. Initital parameter values for the model.
+#' @return A factor, unless otherwise specified, with recoded \code{agevar}.
+#' @examples
+#' age.cat()
+#' 
+
+
+modelmig <- function(data,model,ages,profiles,initial=NULL)
+{
+  data=t(data)
+  beta=list(model7=c(a1=.075, alpha1=.03, a2=.06, alpha2=.1, mu2=20, lambda2=.4, c=.003), 
+            model9=c(a1=.075, alpha1=.03, a2=.06, alpha2=.1, mu2=20, lambda2=.3, a3=.75,lambda3=.145, c=.003),
+            model11=c(a1=.075, alpha1=.03, a2=.06, alpha2=.1, mu2=20, lambda2=.35, a3=.85,lambda3=.155, c=.003))
+  beta0=ifelse(initial==NULL, beta[[model]],initial)
+  lb=0
+  control=nls.control(maxiter=100000000, tol=.000000000001, minFactor=0.000000001)
+  param=mat.or.vec(profiles, length(beta0))
+  sched=mat.or.vec(profiles, (ages+1))
+  fitting=mat.or.vec(profiles,2)
+  model7=y~a1*exp(-alpha1*age) + a2*exp(-alpha2*(age-mu2) - exp(-lambda2*(age-mu2)))+c
+  model9=y~a1*exp(-alpha1*age) + a2*exp(-alpha2*(age-mu2) - exp(-lambda2*(age-mu2)))+a3*exp(lambda3*age)+c
+  model11=y~a1*exp(-alpha1*age) + a2*exp(-alpha2*(age-mu2) - exp(-lambda2*(age-mu2)))+a3*exp(lambda3*age)+c
+  models=list(model7=model7, model9=model9, model11=model11)
+  
+  for (i in 1:profiles)
+  { 
+    age=rep(0:ages)
+    y=as.vector(data[,i+1])
+    fit<-nls(models[[model]] , start=beta0, control=control, algorithm="port", lower=lb)
+    param[i,]=coef(fit)
+    sched[i,]=predict(fit, age)
+    sst=sum(y-mean(y))^2
+    ssr=sum(residuals(fit)-mean(residuals(fit)))^2
+    fitting[i,2]=1-(ssr/sst)
+    fitting[i,1]=(100*(1/(length(age)-1)))*sum(abs((sched[i,]-y))/y)
+  }
+  
+  write.table(param, "parameter.est.7param.csv", sep=",")
+  write.table(sched, "predicted.profiles.7param.csv", sep=",")
+  write.table(fitting, "fit.stats.7param.csv", sep=",")
+  return(list(param, sched, fitting))
+}
+
+
+

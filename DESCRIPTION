@@ -9,3 +9,4 @@ Description: A Personal Package with useful functions written (or borrowed) by
     Rob. Includes functions for categorizing age, growth rates, relative size
     calculations, and exporting data to an Excel file.
 License: MIT + file LICENSE
+LazyData: True
