@@ -17,7 +17,7 @@ ann.gr<- function(begin,end, n){
 #' 
 #' @param data Data Frame with the age variable to categorize.
 #' @param agevar Name of the age variable.
-#' @param groups Categorization Scheme: census, five, or ten. 
+#' @param groups Categorization Scheme: census, census65,  five, or ten. 
 #' @param factor Return a factor or not.  Defaults to TRUE 
 #' @keywords age, recode
 #' @return A factor, unless otherwise specified, with recoded \code{agevar}.
@@ -28,6 +28,10 @@ ann.gr<- function(begin,end, n){
 age.cat= function(data, agevar, groups="census", factor=TRUE){
   require(car, quietly=TRUE)
    gl=list(
+    census65=list(
+      recode="0:4=1; 5:17=2; 18:24=3;  25:34=4; 35:44=5; 45:54=6; 55:64=7; 65:115=8", 
+      labels=c("0 to 4" ,"5 to 17", "18 to 24", "25 to 34", "35 to 44","45 to 54","55 to 64", "65 and Over"),
+      levels=8),
     census=list(
       recode="0:4=1; 5:17=2; 18:24=3;  25:34=4; 35:44=5; 45:54=6; 55:64=7; 65:74=8; 75:84=9; 85:115=10", 
       labels=c("0 to 4" ,"5 to 17", "18 to 24", "25 to 34", "35 to 44","45 to 54","55 to 64", "65 to 74", "75 to 84", "85 and Over"),
