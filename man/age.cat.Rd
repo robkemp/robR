@@ -11,7 +11,7 @@ age.cat(data, agevar, groups = "census", factor = TRUE)
 
 \item{agevar}{Name of the age variable.}
 
-\item{groups}{Categorization Scheme: census, five, or ten.}
+\item{groups}{Categorization Scheme: census, census65,  five, or ten.}
 
 \item{factor}{Return a factor or not.  Defaults to TRUE}
 }
