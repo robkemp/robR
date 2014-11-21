@@ -78,7 +78,7 @@ ed.cat= function(data, edvar, groups="basic",factor=TRUE){
                "Associate's Degree", "Bachelor's or higher"),
       levels=5),
     higher=list(
-      recode="0:15=1;16:17=2;18:19=3; 20=4; 21=5, 22=6; 23:24=7",
+      recode="0:15=1;16:17=2;18:19=3; 20=4; 21=5; 22=6; 23:24=7",
       labels=c("Less than High School", "High School or GED", "Some College", 
                "Associate's Degree","Bachelor's Degree", "Master's Degree", 
                "Graduate or Professional Degree"),
