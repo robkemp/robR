@@ -13,7 +13,7 @@ save.xlsx(file, ...)
 }
 \description{
 This function is wrapper function by Rob Kabacoff.
-See: http://bit.ly/1wbMCe8
+See: http://bit.ly/1wbMCe8.
 It will save as many objects as you need to new sheets in Excel
 }
 \examples{
