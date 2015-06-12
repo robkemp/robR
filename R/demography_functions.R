@@ -46,7 +46,7 @@ age.cat= function(data, agevar, groups="census", factor=TRUE){
     ten=list(
       recode="0:9=1;10:19=2;20:29=3;30:39=4;40:49=5;50:59=6;60:69=7;70:79=8;80:89=9;90:115=10",
       labels=c("0 to 9", "10 to 19", "20 to 29", "30 to 39","40 to 49","50 to 59", "60 to 69",
-               "70 79","80 to 89", "90 and Over"),
+               "70 to 79","80 to 89", "90 and Over"),
       levels=10))
   grp=gl[[groups]]
   v=recode(data[[agevar]], grp$recode)
