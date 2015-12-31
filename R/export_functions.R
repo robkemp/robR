@@ -21,8 +21,8 @@ save.xlsx <- function (file, ...)
   for (i in 1:nobjects) {
     if (i == 1)
       write.xlsx(objects[[i]], file, sheetName = objnames[i],row.names = FALSE)
-    else write.xlsx(objects[[i]], file, sheetName = objnames[i],
-                    append = TRUE, row.names = FALSE)
+    else write.xlsx(objects[[i]], file, sheetName = objnames[i], row.names = FALSE,
+                    append = TRUE)
   }
   print(paste("Workbook", file, "has", nobjects, "worksheets."))
 }
